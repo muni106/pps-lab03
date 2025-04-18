@@ -4,6 +4,8 @@ import Optionals.Optional.*
 import extensionmethods.Sequences.*
 import org.junit.*
 import org.junit.Assert.*
+import u02.Modules.Person
+import u02.Modules.Person.*
 
 class SequenceTest:
   import u03.Sequences.*
@@ -85,5 +87,12 @@ class SequenceTest:
     val (evenEmpty, oddEmpty) = partition(emptySequence)(x => true)
     assertEquals(Nil(), evenEmpty)
     assertEquals(Nil(), oddEmpty)
+
+  @Test def testCourses(): Unit =
+    val teacher1 = Person.Teacher("Mirko", "pps")
+    val teacher2 = Person.Teacher("Alessandro", "pcd")
+    val student = Person.Student("Ettore", 2025)
+    assertEquals(Cons(Person.course(teacher1), Cons(Person.course(teacher2), Nil())),
+      courses(Cons(teacher1, Cons(student, Cons(teacher2, Nil())))))
 
 end SequenceTest

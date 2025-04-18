@@ -2,6 +2,7 @@ package u03
 
 import u03.Optionals.Optional
 import u03.Optionals.Optional.*
+import u02.Modules.Person
 
 object Sequences: // Essentially, generic linkedlists
 
@@ -121,6 +122,9 @@ object Sequences: // Essentially, generic linkedlists
      * E.g., [11, 20, 31] => ([20], [11, 31]) if pred is (_ % 2 == 0)
      */
     def partition[A](s: Sequence[A])(pred: A => Boolean): (Sequence[A], Sequence[A]) = ???
+
+    def courses(s: Sequence[Person]): Sequence[String] = s match
+      case _ => map(filter(s)(!Person.isStudent(_)))(Person.course)
 
   end Sequence
 end Sequences
