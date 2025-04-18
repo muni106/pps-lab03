@@ -4,6 +4,8 @@ import u03.Optionals.Optional
 import u03.Optionals.Optional.*
 import u02.Modules.Person
 
+import scala.annotation.tailrec
+
 object Sequences: // Essentially, generic linkedlists
 
   enum Sequence[E]:
@@ -125,6 +127,15 @@ object Sequences: // Essentially, generic linkedlists
 
     def courses(s: Sequence[Person]): Sequence[String] = s match
       case _ => map(filter(s)(!Person.isStudent(_)))(Person.course)
+
+    @tailrec
+    def foldLeft(s: Sequence[Int])(default: Int)(operator: (Int, Int) => Int): Int = s match
+      case Cons(h, t) => foldLeft(t)(operator(default, h))(operator)
+      case Nil() => default
+
+    def numCoursesTaught(s: Sequence[Person]): Int = s match
+      case Cons(h, t) => foldLeft(map(filter(s)(!Person.isStudent(_)))(_ => 1))(0)(_ + _)
+      case Nil() => 0
 
   end Sequence
 end Sequences

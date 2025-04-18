@@ -95,4 +95,15 @@ class SequenceTest:
     assertEquals(Cons(Person.course(teacher1), Cons(Person.course(teacher2), Nil())),
       courses(Cons(teacher1, Cons(student, Cons(teacher2, Nil())))))
 
+  @Test def testFoldLeft(): Unit =
+    val lst = Cons(3, Cons(7, Cons(1, Cons(5, Nil()))))
+    foldLeft(lst)(0)(_ - _)
+
+  @Test def testNumCoursesTaugh(): Unit =
+    val teacher1 = Person.Teacher("Mirko", "pps")
+    val teacher2 = Person.Teacher("Alessandro", "pcd")
+    val student1 = Person.Student("Ettore", 2025)
+    val student2 = Person.Student("Ettore", 2025)
+    assertEquals(numCoursesTaught(Cons(teacher1, Cons(student1,Cons(student2, Cons(teacher2, Nil()))))), 2)
+
 end SequenceTest
