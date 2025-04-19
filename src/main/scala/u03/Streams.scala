@@ -44,8 +44,14 @@ object Streams extends App:
       case _ => Empty()
 
     def fill[A](num: Int)(filler: A): Stream[A] = num match
-      case num if num > 0 => Cons(() => filler, () => fill(num - 1)(filler))
+      case num if num > 0 => cons(filler, fill(num - 1)(filler))
       case num if num == 0 => empty()
+
+    def fibonacci(): Stream[Int] =
+      def fibs(a: Int, b: Int): Stream[Int] =
+        cons(a, fibs(b, a + b))
+      fibs(0, 1)
+
 
     def interleave[A](stream1: Stream[A], stream2: Stream[A]): Stream[A] = (stream1, stream2) match
       case (Cons(h1, t1), Cons(h2, t2)) => cons(h1(), cons(h2(), interleave(t1(), t2())))

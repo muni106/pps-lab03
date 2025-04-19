@@ -31,5 +31,10 @@ class StreamTest:
   @Test def testFill(): Unit =
     assertEquals(Stream.toList(Stream.fill(3)("a")), Cons("a", Cons("a", Cons("a", Nil()))))
     assertEquals(Stream.toList(Stream.fill(0)("a")), Nil())
+  
+  @Test def fibonacci(): Unit =
+    val fibonacci: Stream[Int] = Stream.fibonacci()
+    assertEquals(Stream.toList(Stream.take(fibonacci)(5)), Cons (0, Cons (1, Cons (1, Cons (2, Cons (3, Nil ()))))))
 
+  // assertEquals(Stream.toList)
 end StreamTest
